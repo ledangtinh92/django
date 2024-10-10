@@ -1,0 +1,52 @@
+{% load compress %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load cache %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    {% bootstrap_css %}
+    {% compress css %}
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% block extra_css %}{% endblock %}
+    {% endcompress %}
+</head>
+<body class="sb-nav-fixed">
+{% cache 600 nav_top %}
+    {% include 'common/nav-top.html' %}
+{% endcache %}
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        {% cache 6 left_nav %}
+            {% include 'common/left-side-nav.html' %}
+        {% endcache %}
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                {% block content %}
+                    <p>Default content</p>
+                {% endblock %}
+            </div>
+        </main>
+        {% cache 600 footer %}
+            {% include 'common/footer.html' %}
+        {% endcache %}
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+{% bootstrap_javascript %}
+{% compress js %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/datatables.js' %}"></script>
+{% endcompress %}
+</body>
+</html>

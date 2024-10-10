@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load compress %}
+{% load static %}
+{% block title %}Category List{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/categorys.scss' %}">
+{% endblock %}
+{% block content %}
+    <h1 class="mt-4">Category List</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/static">Dashboard</a></li>
+        <li class="breadcrumb-item active">Categories</li>
+    </ol>
+    <a href="{% url 'add_category' %}" class="btn btn-secondary">Add a New categories</a>
+    <div class="card mb-4 mt-4">
+        <div class="card-header">
+            Category List
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple" class="table category-table category-table-item">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">color</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <th scope="row">{{ category.id }}</th>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <span style="background-color: {{ category.color }}" class="category-table__color"></span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

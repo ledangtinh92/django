@@ -1,0 +1,32 @@
+{% load compress %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load cache %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    {% bootstrap_css %}
+    {% compress css %}
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% block extra_css %}{% endblock %}
+    {% endcompress %}
+</head>
+<body class="layoutAuthentication">
+<main class="w-100 h-100">
+    {% block content %}
+        <p>Default content</p>
+    {% endblock %}
+</main>
+{% bootstrap_javascript %}
+{% compress js %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endcompress %}
+</body>
+</html>

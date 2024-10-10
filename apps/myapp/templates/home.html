@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Welcome to Python</h1>
+    {% if user.is_authenticated %}
+        <ul>
+            <li>
+                <a href="{% url 'product_list' %}">View Products</a>
+            <li>
+                <a href="{% url 'category_list' %}">View Category</a>
+            </li>
+        </ul>
+    {% else %}
+        <h1>You are not logged in</h1>
+    {% endif %}
+
+{% endblock %}

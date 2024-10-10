@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}add product{% endblock %}
+{% block content %}
+    <h1>New Category</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/static">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'category_list' %}" >Category List</a></li>
+        <li class="breadcrumb-item active">Add Category</li>
+    </ol>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="flex-row">
+                    <a href="{% url 'category_list' %}" class="btn btn-success">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Back
+                    </a>
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
